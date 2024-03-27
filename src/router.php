@@ -1,5 +1,6 @@
 <?php
 
+use src\Repositories\UserRepository;
 use src\controllers\HomeController;
 
 $HomeController = new HomeController;
@@ -17,7 +18,9 @@ switch ($route) {
         $HomeController->index();
         }
         break;
-      
+    case HOME_URL.'test':
+        $AllUsers= new UserRepository();
+        var_dump($AllUsers->getAllUsers());
     default:
         $HomeController->page404();
         break;
