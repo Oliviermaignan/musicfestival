@@ -16,6 +16,7 @@ class Database {
 
         try {
             $base = 'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME;
+            $base = 'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME;
             $this->DB = new PDO($base, DB_USER, DB_PWD, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
         } catch (PDOException $error) {
           echo 'Erreur de connexion à la base de Données : '. $error->getMessage();
@@ -24,6 +25,7 @@ class Database {
     public function getDB(): PDO
     {
       return $this->DB;
-    }
+    } 
+
 }
 

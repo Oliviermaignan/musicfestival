@@ -2,8 +2,7 @@
 
 namespace src\Services;
 
-trait Hydratation
-{
+trait Hydratation{
 
   public function __construct(array $data = array()) {
     $this->hydrate($data);

@@ -2,6 +2,7 @@
 
 use src\Repositories\UserRepository;
 use src\controllers\HomeController;
+use src\Repositories\ReservationRepository;
 
 $HomeController = new HomeController;
 
