@@ -5,18 +5,21 @@ use DateTime;
 use src\Services\Hydratation;
 
 class User {
-    private int $id;
-    private string $prenom;
-    private string $nom;
-    private string $email;
-    private int $telephone;
-    private DateTime $RGPD;
-    private string $adresse;
-    private string $role;
-  
-    use Hydratation;
+  private int $id;
+  private $prenom;
+  private $nom;
+  private $email;
+  private $telephone;
+  private $RGPD;
+  private $adressePostale;
+  private $role;
+  private $motDePasse;
 
-    public function getPrenom(): string {return $this->prenom;}
+  use Hydratation;
+
+  public function getId(): int {return $this->id;}
+
+  public function getPrenom(): string {return $this->prenom;}
 
 	public function getNom(): string {return $this->nom;}
 
@@ -24,11 +27,15 @@ class User {
 
 	public function getTelephone(): int {return $this->telephone;}
 
-	public function getRGPD(): DateTime {return $this->RGPD;}
+	public function getRGPD(): string {   return $this->RGPD->format('H:i:s');}
 
-	public function getAdresse(): string {return $this->adresse;}
+	public function getadressePostale(): string {return $this->adressePostale;}
 
 	public function getRole(): string {return $this->role;}
+
+	public function getMotDePasse(): string {return $this->motDePasse;}
+
+	public function setId(string $id): void {$this->id = $id;}
 
 	public function setPrenom(string $prenom): void {$this->prenom = $prenom;}
 
@@ -38,7 +45,7 @@ class User {
 
 	public function setTelephone(int $telephone): void {$this->telephone = $telephone;}
 
-	public function setRGPD(DateTime $RGPD): void {
+	public function setRGPD(string | DateTime $RGPD): void {
         if ($RGPD instanceof DateTime) {
             $this->RGPD = $RGPD;
           } else {
@@ -46,8 +53,10 @@ class User {
           }
     }
 
-	public function setAdresse(string $adresse): void {$this->adresse = $adresse;}
+	public function setadressePostale(string $adressePostale): void {$this->adressePostale = $adressePostale;}
 
 	public function setRole(string $role): void {$this->role = $role;}
+
+  public function setMotDePasse(string $motDePasse): void {$this->motDePasse = $motDePasse;}
 
 }

@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `b5_utilisateurs` (
   `telephone` int NOT NULL,
   `RGPD` date DEFAULT NULL,
   `adresse_postale` varchar(255) NOT NULL,
-  `rôle` varchar(50) NOT NULL,
+  `role` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `telephone` (`telephone`)
