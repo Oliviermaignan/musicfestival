@@ -1,6 +1,7 @@
 <?php
 
 use src\controllers\HomeController;
+use src\Repositories\ReservationRepository;
 
 $HomeController = new HomeController;
 
@@ -17,7 +18,10 @@ switch ($route) {
         $HomeController->index();
         }
         break;
-      
+    case HOME_URL.'test':
+           $AllUsers= new ReservationRepository();
+            var_dump($AllUsers->getAllReservation());
+
     default:
         $HomeController->page404();
         break;
