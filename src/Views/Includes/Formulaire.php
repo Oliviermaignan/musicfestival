@@ -49,6 +49,7 @@
     <!-- FACULTATIF : ajouter un pass groupe (5 adultes : 150€ / jour) uniquement pass 1 jour -->
 
     <p class="bouton" onclick="displayForm(2)">Suivant</p>
+    
   </fieldset>
   <fieldset id="options">
     <legend>Options</legend>
@@ -101,6 +102,7 @@
     <input type="number" name="nombreLugesEte" id="nombreLugesEte">
 
     <p class="bouton" onclick="displayForm(3)">Suivant</p>
+    <p class="bouton" onclick="displayForm(3)">Precédent</p>
   </fieldset>
 
   <fieldset id="coordonnees">
@@ -115,7 +117,10 @@
     <input type="text" name="telephone" id="telephone" required>
     <label for="adressePostale">Adresse Postale :</label>
     <input type="text" name="adressePostale" id="adressePostale" required>
+    <label for="motDePasse">Mot de passe :</label>
+    <input type="password" name="motDePasse" id="motDePasse">
 
     <input type="submit" name="soumission" class="bouton" value="Réserver">
+    <p class="bouton" onclick="displayForm(4)">Precédent</p>
   </fieldset>
 </form>
