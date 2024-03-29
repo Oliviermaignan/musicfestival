@@ -3,8 +3,10 @@
 use src\Repositories\UserRepository;
 use src\controllers\HomeController;
 use src\Repositories\ReservationRepository;
+use src\controllers\ReservationController;
 
 $HomeController = new HomeController;
+$ReservationController = new ReservationController;
 
 $route = $_SERVER['REDIRECT_URL'];
 $methode = $_SERVER['REQUEST_METHOD'];
@@ -20,8 +22,9 @@ switch ($route) {
         }
         break;
     case HOME_URL.'test':
-        $AllUsers= new UserRepository();
-        var_dump($AllUsers->getThisUserById(2));
+        
+    case HOME_URL.'treatment':
+        $ReservationController->formTreatment();
     default:
         $HomeController->page404();
         break;

@@ -1,4 +1,4 @@
-<form action="HOME_URL . treatment" id="inscription" method="POST">
+<form action="<?=HOME_URL . "treatment" ?>" id="inscription" method="POST">
   <fieldset id="reservation">
     <legend>Réservation</legend>
     <h3>Nombre de réservation(s) :</h3>
@@ -74,13 +74,13 @@
     <label for="campingVan">Réserver une ou plusieurs nuits pour camion aménagé</label>
 
     <section id="nuitCamion">
-      <input type="checkbox" id="vanNuit1" name="vanNuit" value="vanNuit1">
+      <input type="checkbox" id="vanNuit1" name="nuitVan" value="vanNuit1">
       <label for="vanNuit1">Pour la nuit du 01/07 (5€)</label>
-      <input type="checkbox" id="vanNuit2" name="vanNuit" value="vanNuit2">
+      <input type="checkbox" id="vanNuit2" name="nuitVan" value="vanNuit2">
       <label for="vanNuit2">Pour la nuit du 02/07 (5€)</label>
-      <input type="checkbox" id="vanNuit3" name="vanNuit" value="vanNuit3">
+      <input type="checkbox" id="vanNuit3" name="nuitVan" value="vanNuit3">
       <label for="vanNuit3">Pour la nuit du 03/07 (5€)</label>
-      <input type="checkbox" id="van3Nuits" name="vanNuit" value="van3Nuits">
+      <input type="checkbox" id="van3Nuits" name="nuitVan" value="van3Nuits">
       <label for="van3Nuits">Pour les 3 nuits (12€)</label>
     </section>
 
@@ -106,16 +106,18 @@
   <fieldset id="coordonnees">
     <legend>Coordonnées</legend>
     <label for="nom">Nom :</label>
-    <input type="text" name="nom" id="nom" required>
+    <input type="text" name="nom" id="nom">
     <label for="prenom">Prénom :</label>
-    <input type="text" name="prenom" id="prenom" required>
+    <input type="text" name="prenom" id="prenom">
     <label for="email">Email :</label>
-    <input type="email" name="email" id="email" required>
+    <input type="email" name="email" id="email">
     <label for="telephone">Téléphone :</label>
-    <input type="text" name="telephone" id="telephone" required>
+    <input type="text" name="telephone" id="telephone">
     <label for="adressePostale">Adresse Postale :</label>
-    <input type="text" name="adressePostale" id="adressePostale" required>
+    <input type="text" name="adressePostale" id="adressePostale">
+    <label for="motDePasse">Mot de passe :</label>
+    <input type="password" name="motDePasse" id="motDePasse">
 
-    <input type="submit" name="soumission" class="bouton" value="Réserver">
+    <input type="submit" class="bouton">
   </fieldset>
 </form>
