@@ -20,9 +20,8 @@ switch ($route) {
         }
         break;
     case HOME_URL.'test':
-           $AllUsers= new ReservationRepository();
-            var_dump($AllUsers->getAllReservation());
-
+        $AllUsers= new UserRepository();
+        var_dump($AllUsers->getThisUserById(2));
     default:
         $HomeController->page404();
         break;
