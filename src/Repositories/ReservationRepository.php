@@ -29,7 +29,5 @@ class ReservationRepository{
         $statement->execute();
         $statement->setFetchMode(PDO::FETCH_CLASS, Reservation::class);
         return $statement->fetch();
-
     }
-
 }

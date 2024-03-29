@@ -12,8 +12,10 @@ class Reservation{
     private $typeDePass;
     private $typeDeNuitee;
     private $idUtilisateurs;
+    private $jour;
 
-        use Hydratation;
+    use Hydratation;
+
     public function __construct(array $data = array())
     {
         $this->hydrate($data);
@@ -25,7 +27,7 @@ class Reservation{
 	}
     public function setId(int $id): void
 	{
-		$this->Id = $id;
+		$this->id = $id;
 	}
     public function getQuantite(): int
 	{
@@ -57,7 +59,7 @@ class Reservation{
 	}
     public function setIdUtilisateurs(int $idUtilisateurs): void
 	{
-		$this->IdUtilisateurs = $idUtilisateurs;
+		$this->idUtilisateurs = $idUtilisateurs;
 	}
     function getPrix(): int
     {
@@ -76,12 +78,16 @@ class Reservation{
     {
         $this->typeDePass = $typeDePass;
     }
-    function getTypeDeNuitee(): string
-    {
+    function getTypeDeNuitee(): string {
         return $this->typeDeNuitee;
     }    
-    function setTypeDeNuitee(string $typeDeNuitee): void
-    {
-        $this->typeDePass = $typeDeNuitee;
+    function setTypeDeNuitee(int $typeDeNuitee): void {
+        $this->typeDeNuitee = $typeDeNuitee;
+    }
+    function getJour(): string {
+        return $this->jour;
+    }    
+    function setJour(int $jour): void {
+        $this->jour = $jour;
     }
 }
