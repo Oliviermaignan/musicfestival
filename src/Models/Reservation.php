@@ -4,15 +4,14 @@ namespace src\Models;
 use src\Services\Hydratation;
 
 class Reservation{
-    private $Id;
+    private $id;
     private $quantite;
     private $casque;
     private $luge;
-    private $tarif;
-    private $joursChoisis;
-    private $Tentes;
-    private $Camions;
-    private $IdUtilisateurs;
+    private $prix;
+    private $typeDePass;
+    private $typeDeNuitee;
+    private $idUtilisateurs;
 
         use Hydratation;
     public function __construct(array $data = array())
@@ -22,17 +21,17 @@ class Reservation{
 
     public function getId(): int
 	{
-		return $this->Id;
+		return $this->id;
 	}
-    public function setId(int $Id): void
+    public function setId(int $id): void
 	{
-		$this->Id = $Id;
+		$this->Id = $id;
 	}
-    public function getquantite(): int
+    public function getQuantite(): int
 	{
 		return $this->quantite;
 	}
-    public function setquantite(int $quantite): void
+    public function setQuantite(int $quantite): void
 	{
 		$this->quantite = $quantite;
 	}
@@ -54,43 +53,35 @@ class Reservation{
     }
     public function getIdUtilisateurs(): int
 	{
-		return $this->IdUtilisateurs;
+		return $this->idUtilisateurs;
 	}
-    public function setIdUtilisateurs(int $IdUtilisateurs): void
+    public function setIdUtilisateurs(int $idUtilisateurs): void
 	{
-		$this->IdUtilisateurs = $IdUtilisateurs;
+		$this->IdUtilisateurs = $idUtilisateurs;
 	}
-    function getTarif(): int
+    function getPrix(): int
     {
-        return $this->tarif;
+        return $this->prix;
     }    
-    function settarif(int $tarif): void
+    function setPrix(int $prix): void
     {
-        $this->tarif = $tarif;
+        $this->prix = $prix;
     }
   
-    function getjoursChoisis(): string
+    function getTypeDePass(): string
     {
-        return $this->joursChoisis;
+        return $this->typeDePass;
     }    
-    function setjoursChoisis(string $joursChoisis): void
+    function setTypeDePass(string $typeDePass): void
     {
-        $this->joursChoisis = $joursChoisis;
+        $this->typeDePass = $typeDePass;
     }
-    function getTentes(): int
+    function getTypeDeNuitee(): string
     {
-        return $this->Tentes;
+        return $this->typeDeNuitee;
     }    
-    function setTentes(int $Tentes): void 
+    function setTypeDeNuitee(string $typeDeNuitee): void
     {
-        $this->Tentes = $Tentes;
-    }
-    function getCamions(): int
-    {
-        return $this->Camions;
-    }    
-    function setCamions(int $Camions): void
-    {
-        $this->Camions = $Camions;
+        $this->typeDePass = $typeDeNuitee;
     }
 }

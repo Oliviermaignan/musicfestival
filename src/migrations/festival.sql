@@ -59,9 +59,11 @@ DROP TABLE IF EXISTS `b5_relation_reservation_formules`;
 CREATE TABLE IF NOT EXISTS `b5_relation_reservation_formules` (
   `id` int NOT NULL AUTO_INCREMENT,
   `id_formules` int NOT NULL,
+  `id_reservation` int NOT NULL,
   `jour` date NOT NULL,
-  PRIMARY KEY (`id`,`id_formules`),
-  KEY `id_formules` (`id_formules`)
+  PRIMARY KEY (`id`),
+  KEY `id_formules` (`id_formules`),
+  KEY `id_reservation` (`id_reservation`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -74,9 +76,11 @@ DROP TABLE IF EXISTS `b5_relation_reservation_nuitees`;
 CREATE TABLE IF NOT EXISTS `b5_relation_reservation_nuitees` (
   `id` int NOT NULL AUTO_INCREMENT,
   `id_nuitee` int NOT NULL,
+  `id_reservation` int NOT NULL,
   `jour` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`,`id_nuitee`),
-  KEY `id_nuitee` (`id_nuitee`)
+  PRIMARY KEY (`id`),
+  KEY `id_nuitee` (`id_nuitee`),
+  KEY `id_reservation` (`id_reservation`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -87,12 +91,12 @@ CREATE TABLE IF NOT EXISTS `b5_relation_reservation_nuitees` (
 
 DROP TABLE IF EXISTS `b5_reservations`;
 CREATE TABLE IF NOT EXISTS `b5_reservations` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id_reservation` int NOT NULL AUTO_INCREMENT,
   `quantite` int NOT NULL,
   `luge` int DEFAULT NULL,
   `casque` int DEFAULT NULL,
   `id_utilisateurs` int NOT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`id_reservation`),
   KEY `id_utilisateurs` (`id_utilisateurs`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -111,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `b5_utilisateurs` (
   `telephone` int NOT NULL,
   `RGPD` date DEFAULT NULL,
   `adresse_postale` varchar(255) NOT NULL,
-  `rôle` varchar(50) NOT NULL,
+  `role` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `telephone` (`telephone`)
