@@ -31,10 +31,10 @@
         border-radius: 20px;
         background-color: rgb(229, 17, 244);
         border: 5px solid black;
-        height: 440px;
+        height: 550px;
         line-height: 30px;
         cursor: pointer;
-        text-align: justify;
+        text-align: center;
     }
 
     .bouton {
