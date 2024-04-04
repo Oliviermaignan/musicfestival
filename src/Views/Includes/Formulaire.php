@@ -118,7 +118,8 @@
     <input type="text" name="adressePostale" id="adressePostale">
     <label for="motDePasse">Mot de passe :</label>
     <input type="password" name="motDePasse" id="motDePasse">
-
+    <input type="checkbox" name="rgpd" id="rgpd" required>
+    <label for="rgpd">J'accepte les RGPD</label>
     <input type="submit" class="boutonSoumissionFormulaire">
     <p class="bouton" onclick="displayForm(4)">Precédent</p>
   </fieldset>

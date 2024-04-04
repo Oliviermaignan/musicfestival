@@ -5,7 +5,7 @@ use DateTime;
 use src\Services\Hydratation;
 
 class User {
-  private int $id;
+  private $id;
   private $prenom;
   private $nom;
   private $email;
@@ -27,7 +27,7 @@ class User {
 
 	public function getTelephone(): int {return $this->telephone;}
 
-	public function getRGPD(): string {   return $this->RGPD->format('H:i:s');}
+	public function getRGPD(): string {   return $this->RGPD->format('Y-m-d');}
 
 	public function getadressePostale(): string {return $this->adressePostale;}
 
@@ -35,7 +35,7 @@ class User {
 
 	public function getMotDePasse(): string {return $this->motDePasse;}
 
-	public function setId(string $id): void {$this->id = $id;}
+	public function setId(int | null $id): void {$this->id = $id;}
 
 	public function setPrenom(string $prenom): void {$this->prenom = $prenom;}
 
@@ -55,7 +55,13 @@ class User {
 
 	public function setadressePostale(string $adressePostale): void {$this->adressePostale = $adressePostale;}
 
-	public function setRole(string $role): void {$this->role = $role;}
+	public function setRole(string | null $role): void {
+    if ($role === null) {
+      $this->role = 'user';
+    } else {
+      $this->role = $role;
+    }
+  }
 
   public function setMotDePasse(string $motDePasse): void {$this->motDePasse = $motDePasse;}
 

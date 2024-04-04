@@ -37,15 +37,15 @@ class Reservation{
 	{
 		$this->quantite = $quantite;
 	}
-    public function getCasques(): int 
+    public function getCasque(): int 
     {
         return $this->casque;
     }
-    public function setCasques($casque) 
+    public function setCasque($casque) 
     {
-        $this->luge = $casque;
+        $this->casque = $casque;
     }
-    public function getLuges(): int 
+    public function getLuge(): int 
     {
         return $this->luge;
     }

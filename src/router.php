@@ -13,7 +13,6 @@ $methode = $_SERVER['REQUEST_METHOD'];
 
 switch ($route) {
     case HOME_URL:
-
         if (isset($_SESSION['connecté'])) {
         header('location: '.HOME_URL.'dashboard');
         die;
@@ -21,10 +20,12 @@ switch ($route) {
         $HomeController->index();
         }
         break;
-    case HOME_URL.'test':
-        
+    case HOME_URL.'dashboard':
+        $ReservationController->showReservation();
+
     case HOME_URL.'treatment':
         $ReservationController->formTreatment();
+
     default:
         $HomeController->page404();
         break;

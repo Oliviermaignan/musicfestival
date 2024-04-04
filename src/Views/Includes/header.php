@@ -9,9 +9,6 @@
     <script defer src="/assets/js/script.js"type="module"></script>
     <script src="/assets/js/validation.js" defer></script>
     <link href="/assets/style.css" rel="stylesheet">
-
-
-
 </head>
 <body>
     <nav class="navbar bg-body-tertiary">
