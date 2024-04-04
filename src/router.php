@@ -21,7 +21,7 @@ switch ($route) {
         }
         break;
     case HOME_URL.'dashboard':
-        $ReservationController->showReservation();
+        $ReservationController->showReservation($_SESSION['idUtilisateur']);
 
     case HOME_URL.'treatment':
         $ReservationController->formTreatment();

@@ -310,7 +310,9 @@ class ReservationController
             // var_dump($reservation);
             $reservationRepository = new ReservationRepository;
             $reservationRepository->createThisReservation($reservation);
-
+ 
+            //mettre l'id de l'utilisateur dans la session
+            $_SESSION['idUtilisateur'] = $lastUserId;
             header('location: /dashboard');
             die;
         } else {
@@ -319,7 +321,12 @@ class ReservationController
     }
 
     public function showReservation ($id){ 
-        $this->render('Dashboard');
+        $reservationRepository = new ReservationRepository;
+        $reservation = $reservationRepository->getReservationById($id);
+        //faire de meme avec userRepository
+        $userRepository = new UserRepository;
+        $user = $userRepository->getThisUserById($id);
+        $this->render('Dashboard', ['reservation' => $reservation, 'user' => $user]);
     }
 
 }

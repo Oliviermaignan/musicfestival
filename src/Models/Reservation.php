@@ -70,7 +70,7 @@ class Reservation{
         $this->prix = $prix;
     }
   
-    function getTypeDePass(): string
+    function getTypeDePass(): string | null
     {
         return $this->typeDePass;
     }    
@@ -78,10 +78,10 @@ class Reservation{
     {
         $this->typeDePass = $typeDePass;
     }
-    function getTypeDeNuitee(): string {
+    function getTypeDeNuitee(): string | null {
         return $this->typeDeNuitee;
     }    
-    function setTypeDeNuitee(int $typeDeNuitee): void {
+    function setTypeDeNuitee(string|null $typeDeNuitee): void {
         $this->typeDeNuitee = $typeDeNuitee;
     }
     function getJour(): string {
