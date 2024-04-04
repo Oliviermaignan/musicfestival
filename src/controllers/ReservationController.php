@@ -94,6 +94,8 @@ class ReservationController
                 }
             }
 
+            
+
             //commentaire car code un peu complexe a dechiffrer
             //correspondance ID dans BDD
             // Tente, 1 nuit, 5€ (numéro 1)
@@ -105,7 +107,11 @@ class ReservationController
 
             $idNuitee = "";
 
-             var_dump($_POST);
+            
+            var_dump($_POST);
+
+            echo 'idformules: ' . $idFormules .'<br>';
+
             if (isset($_POST['campingVan'])){
                 switch ($_POST['nuitVan']) {
                     case 'vanNuit1':
@@ -175,8 +181,69 @@ class ReservationController
                 }
             }
 
-
+            //on fait passer le prix par plusieurs switch pour le calculer
             $prix = "";
+            if (isset($idFormules)){
+                switch ($idFormules) {
+                    case '1':
+                    $prix = 40;
+                    break;
+                    
+                    case '2':
+                    $prix = 25; 
+                    break;
+                    
+                    case '3':
+                    $prix = 70;
+                    break;
+                    
+                    case '4':
+                    $prix = 50;
+                    break;
+
+                    case '5':
+                    $prix = 100;
+                    break;
+                    
+                    default:
+                    $prix = 65;
+                    break;
+                }
+            }
+            echo 'test1 : ' . $prix . '<br>';
+            if (isset($nombreCasquesEnfants)){
+                $prix += 2 * $nombreCasquesEnfants;
+            } 
+            if ( isset($nombreLugesEte)){
+                $prix += 5 * $nombreLugesEte;
+            }
+            echo $prix;
+            switch ($idNuitee) {
+                case '1':
+                    $prix += 5;
+                    break;
+                
+                case '2':
+                    $prix += 10;
+                    break;
+                
+                case '3':
+                    $prix += 12;
+                    break;
+                
+                case '4':
+                    $prix += 5;
+                    break;
+                
+                case '5':
+                    $prix += 10;
+                    break;
+                
+                default:
+                    $prix += 12;
+                    break;
+            }
+
 
             echo '<pre>',
                 'nom :' . $nom, '<BR>' .

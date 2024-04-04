@@ -1,4 +1,4 @@
-<form action="<?=HOME_URL . "treatment" ?>" id="inscription" method="POST">
+<form action="<?=HOME_URL . "treatment" ?>" id="inscription" method="POST" onsubmit="return validation()">
   <fieldset id="reservation">
     <legend>Réservation</legend>
     <h3>Nombre de réservation(s) :</h3>
@@ -118,6 +118,6 @@
     <label for="motDePasse">Mot de passe :</label>
     <input type="password" name="motDePasse" id="motDePasse">
 
-    <input type="submit" class="bouton">
+    <input type="submit" class="boutonSoumissionFormulaire">
   </fieldset>
 </form>
