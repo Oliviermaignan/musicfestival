@@ -1,8 +1,12 @@
 <?php
 
+use src\Repositories\UserRepository;
 use src\controllers\HomeController;
+use src\Repositories\ReservationRepository;
+use src\controllers\ReservationController;
 
 $HomeController = new HomeController;
+$ReservationController = new ReservationController;
 
 $route = $_SERVER['REDIRECT_URL'];
 $methode = $_SERVER['REQUEST_METHOD'];
@@ -17,7 +21,10 @@ switch ($route) {
         $HomeController->index();
         }
         break;
-      
+    case HOME_URL.'test':
+        
+    case HOME_URL.'treatment':
+        $ReservationController->formTreatment();
     default:
         $HomeController->page404();
         break;
