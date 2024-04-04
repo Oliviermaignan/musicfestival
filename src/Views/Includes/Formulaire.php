@@ -101,6 +101,7 @@
     <input type="number" name="nombreLugesEte" id="nombreLugesEte">
 
     <p class="bouton" onclick="displayForm(3)">Suivant</p>
+    <p class="bouton" onclick="displayForm(3)">Precédent</p>
   </fieldset>
 
   <fieldset id="coordonnees">
@@ -119,5 +120,6 @@
     <input type="password" name="motDePasse" id="motDePasse">
 
     <input type="submit" class="boutonSoumissionFormulaire">
+    <p class="bouton" onclick="displayForm(4)">Precédent</p>
   </fieldset>
 </form>
