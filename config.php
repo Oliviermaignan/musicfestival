@@ -1,9 +1,9 @@
 <?php
 
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'festivale');
-define('DB_USER', 'Festivale');
-define('DB_PWD', 'Festivale');
+define('DB_NAME', 'festival');
+define('DB_USER', 'festival');
+define('DB_PWD', 'festival');
 
 define('HOME_URL', '/');
 

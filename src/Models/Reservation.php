@@ -37,15 +37,15 @@ class Reservation{
 	{
 		$this->quantite = $quantite;
 	}
-    public function getCasques(): int 
+    public function getCasque(): int 
     {
         return $this->casque;
     }
-    public function setCasques($casque) 
+    public function setCasque($casque) 
     {
-        $this->luge = $casque;
+        $this->casque = $casque;
     }
-    public function getLuges(): int 
+    public function getLuge(): int 
     {
         return $this->luge;
     }
@@ -70,7 +70,7 @@ class Reservation{
         $this->prix = $prix;
     }
   
-    function getTypeDePass(): string
+    function getTypeDePass(): string | null
     {
         return $this->typeDePass;
     }    
@@ -78,10 +78,10 @@ class Reservation{
     {
         $this->typeDePass = $typeDePass;
     }
-    function getTypeDeNuitee(): string {
+    function getTypeDeNuitee(): string | null {
         return $this->typeDeNuitee;
     }    
-    function setTypeDeNuitee(int $typeDeNuitee): void {
+    function setTypeDeNuitee(string|null $typeDeNuitee): void {
         $this->typeDeNuitee = $typeDeNuitee;
     }
     function getJour(): string {

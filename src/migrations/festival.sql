@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 28 mars 2024 à 15:19
+-- Généré le : ven. 05 avr. 2024 à 07:52
 -- Version du serveur : 8.2.0
 -- Version de PHP : 8.2.13
 
@@ -88,7 +88,14 @@ CREATE TABLE IF NOT EXISTS `b5_relation_reservation_formules` (
   PRIMARY KEY (`id`),
   KEY `id_formules` (`id_formules`),
   KEY `id_reservation` (`id_reservation`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `b5_relation_reservation_formules`
+--
+
+INSERT INTO `b5_relation_reservation_formules` (`id`, `id_formules`, `id_reservation`, `jour`) VALUES
+(1, 1, 1, '2024-05-30');
 
 -- --------------------------------------------------------
 
@@ -101,11 +108,18 @@ CREATE TABLE IF NOT EXISTS `b5_relation_reservation_nuitees` (
   `id` int NOT NULL AUTO_INCREMENT,
   `id_nuitee` int NOT NULL,
   `id_reservation` int NOT NULL,
-  `jour` varchar(50) DEFAULT NULL,
+  `jour` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_nuitee` (`id_nuitee`),
   KEY `id_reservation` (`id_reservation`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `b5_relation_reservation_nuitees`
+--
+
+INSERT INTO `b5_relation_reservation_nuitees` (`id`, `id_nuitee`, `id_reservation`, `jour`) VALUES
+(1, 1, 1, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -120,16 +134,28 @@ CREATE TABLE IF NOT EXISTS `b5_reservations` (
   `luge` int DEFAULT NULL,
   `casque` int DEFAULT NULL,
   `id_utilisateurs` int NOT NULL,
+  `prix` int DEFAULT NULL,
   PRIMARY KEY (`id_reservation`),
   KEY `id_utilisateurs` (`id_utilisateurs`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `b5_reservations`
 --
 
-INSERT INTO `b5_reservations` (`id_reservation`, `quantite`, `luge`, `casque`, `id_utilisateurs`) VALUES
-(1, 2, 1, 1, 1);
+INSERT INTO `b5_reservations` (`id_reservation`, `quantite`, `luge`, `casque`, `id_utilisateurs`, `prix`) VALUES
+(1, 2, 1, 1, 1, 50),
+(2, 1, 1, 1, 9, 52),
+(3, 1, 1, 1, 10, 52),
+(4, 1, 1, 1, 11, 52),
+(5, 1, 1, 1, 12, 52),
+(6, 1, 1, 1, 13, 52),
+(7, 1, 1, 1, 14, 52),
+(8, 1, 1, 1, 15, 52),
+(9, 1, 1, 1, 16, 52),
+(10, 1, 1, 1, 17, 52),
+(11, 1, 1, 1, 18, 52),
+(12, 1, 1, 1, 19, 67);
 
 -- --------------------------------------------------------
 
@@ -147,17 +173,36 @@ CREATE TABLE IF NOT EXISTS `b5_utilisateurs` (
   `RGPD` date DEFAULT NULL,
   `adresse_postale` varchar(255) NOT NULL,
   `role` varchar(50) NOT NULL,
+  `mot_de_passe` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `telephone` (`telephone`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `b5_utilisateurs`
 --
 
-INSERT INTO `b5_utilisateurs` (`id`, `prenom`, `nom`, `email`, `telephone`, `RGPD`, `adresse_postale`, `role`) VALUES
-(1, 'olivier', 'Mai', 'ol.maig@gml.com', 671749612, '2024-03-28', '45 r de fontenay', 'user');
+INSERT INTO `b5_utilisateurs` (`id`, `prenom`, `nom`, `email`, `telephone`, `RGPD`, `adresse_postale`, `role`, `mot_de_passe`) VALUES
+(1, 'olivier', 'Mai', 'ol.maig@gml.com', 671749612, '2024-03-28', '45 r de fontenay', 'user', NULL),
+(2, 'aaa', 'aaa', 'aaa@aaa.Fr', 671749613, '2024-04-04', 'aaa', 'user', '$2y$10$9PwDBADJisE61ZPn8egUauAmNwS5bK3gU3bzo5M6JVgFLJJvbOjf6'),
+(3, 'aaa', 'aaa', 'aaa@aba.Fr', 671749610, '2024-04-04', 'aaa', 'user', '$2y$10$RjVnM9OWTZVykVx32qU4j.WQEa.p8kNxhab/wOgswLXD9VFgW0YVa'),
+(4, 'aaa', 'lastOliv', 'aaa@aca.Fr', 671749611, '2024-04-04', 'aaa', 'user', '$2y$10$MrZX/S.BRsSUyIwD8Qct4.i6xcwe4qap73tKyAir/hQr3Y.xnxNDC'),
+(5, 'aaa', 'lastOliv', 'aaa@ada.Fr', 671749615, '2024-04-04', 'aaa', 'user', '$2y$10$DoXk8YhkXPtSrQThgjYqw.QsP2LxxPGbcJ1Y0L98Nr2w7ednmXuiy'),
+(6, 'aaa', 'lastOliv', 'aaa@afa.Fr', 671749616, '2024-04-04', 'aaa', 'user', '$2y$10$ZaFNG5iQ5OX40/MpijjpgOUlYnqFLOrRsnBolJ/IrrNky.xV7U0ba'),
+(7, 'mmm', 'olivier', 'ol.mm@gmm.f', 675742312, '2024-04-04', 'hihihi', 'user', '$2y$10$yKUXPQ0y62b/1rHMOTFmtOswX6VQegKPokpz56DV0A4H9r9WXWQty'),
+(8, 'mmm', 'olivier', 'ol.mm@gmm.e', 675742313, '2024-04-04', 'hihihi', 'user', '$2y$10$h6ViMsthNTiT.lt0qC7bseMGshxbcH9YcBGkysfafgpP3j3trvHMS'),
+(9, 'mmm', 'olivier', 'ol.mm@gmm.a', 786868686, '2024-04-04', 'hihihi', 'user', '$2y$10$iHJxGmpTggcNRr.IT.Bw7OPiZ5mTk7PtwxhX.zI74jPS5BJvkXSs6'),
+(10, 'mmm', 'olivier', 'ol.mm@gmm.c', 786868689, '2024-04-04', 'hihihi', 'user', '$2y$10$W1jBYxT9bVBQemtPfVrayu4ihGnSJoVI8qD0OHDcyW.6BJkFPAyGq'),
+(11, 'mmm', 'olivier', 'ol.mm@gmm.d', 786868690, '2024-04-04', 'hihihi', 'user', '$2y$10$Bapjv9K0MzRdnyG0SGi1feEc/8Xnjk2Y/ro4kmM6PuCmPvLlmms5O'),
+(12, 'mmm', 'olivier', 'ol.mm@gm.gg', 786868694, '2024-04-04', 'hihihi', 'user', '$2y$10$CqKf104DpwoGII7HZC1SJesvn.Ck19wrEPQMZvEKc8nlr.0.czZOK'),
+(13, 'mai', 'olivier', 'ol.mm@gg.ff', 671749624, '2024-04-04', '45 r de r', 'user', '$2y$10$dDK5uwQiQSbTE7ev9uP1cO5TovcR7hok9Qh3ACxlVzOt1BgR8O7rO'),
+(14, 'mai', 'olivier', 'ol.mm@gg.zz', 671749623, '2024-04-04', '45 r de r', 'user', '$2y$10$L2jUzJ6MVFGiVfGaI4LGe.hjIt2X/s3U8Hhn.En.iht7IjBh2a66a'),
+(15, 'aaa', 'aaa', 'aaa@aaa.de', 675757575, '2024-04-04', 'rrr', 'user', '$2y$10$engpCQBNTpsyWoGv7gPOlOHgy4gx6WhFsjChmnN8lOq1xvtiV5jTK'),
+(16, 'eee', 'olivi', 'ol.ff@ff.ee', 606060606, '2024-04-04', 'rr', 'user', '$2y$10$IUEOGWwJkQ/HWzjiobeCGe9njr.y8ltSdeu3VlKefzgVbJ8j/0GAK'),
+(17, 'eee', 'olivi', 'ol.ff@ff.er', 606060604, '2024-04-04', 'rr', 'user', '$2y$10$jfU.f/aaNS6A4C3yi8cL6.yK2UIGH15pInzFAwbTcjT8d1fkHXDq6'),
+(18, 'Olivier', 'Maignan', 'ol.ff@fafa.fafa', 606060687, '2024-04-04', 'rr', 'user', '$2y$10$7OGSD/VVf2DHZpnn1nzOq..uQiMIAAlKJOtV3SVWKMejqouwVW/5y'),
+(19, 'herivola', 'herivola', 'herivola@gal.fr', 606063423, '2024-04-05', '45 r de R', 'user', '$2y$10$Nmlyik6G5HLyqtxwW4kFUe0BZi1BDcY0cFBxjewwJ4kR5Iw13oRE.');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

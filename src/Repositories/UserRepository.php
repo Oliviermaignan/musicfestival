@@ -36,7 +36,7 @@ class UserRepository
 
   public function createThisUser(User $User): User
   {
-    $sql = "INSERT INTO  (id, prenom, nom, email, telephone, RGPD, adresse_postale, role, motDePasse) VALUES (:id, :prenom, :nom, :email, :telephone, :RGPD, :adresse_postale, :role, :motDePasse);";
+    $sql = "INSERT INTO b5_utilisateurs (prenom, nom, email, telephone, RGPD, adresse_postale, role, mot_de_passe) VALUES (:prenom, :nom, :email, :telephone, :RGPD, :adresse_postale, :role, :mot_de_passe);";
 
     $statement = $this->DB->prepare($sql);
 
@@ -48,14 +48,21 @@ class UserRepository
       ':RGPD'              => $User->getRGPD(),
       ':adresse_postale'   => $User->getAdressePostale(),
       ':role'              => $User->getRole(),
-      ':motDePasse'        => $User->getMotDePasse()
+      ':mot_de_passe'      => $User->getMotDePasse()
     ]);
 
     $id = $this->DB->lastInsertId();
     $User->setId($id);
 
-    return $film;
+    return $User;
   }
 
-
+  public function getLastId(): int
+  {
+    $sql = "SELECT LAST_INSERT_ID() as last_id;";
+    $statement = $this->DB->query($sql);
+    $statement->execute();
+    $id = $statement->fetchColumn();
+    return $id;
+  }
 }

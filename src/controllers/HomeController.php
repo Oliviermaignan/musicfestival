@@ -16,7 +16,6 @@ class HomeController
     } else {
       $erreur = '';
     }
-
     $this->render("accueil", ["erreur"=> $erreur]);
   }
 

@@ -3,6 +3,10 @@
 namespace src\Controllers;
 
 use src\Services\Response;
+use src\Models\User;
+use src\Models\Reservation;
+use src\Repositories\UserRepository;
+use src\Repositories\ReservationRepository;
 
 class ReservationController
 {
@@ -43,14 +47,15 @@ class ReservationController
             $adresse = htmlspecialchars($_POST['adressePostale']);
 
             if (isset($_POST['nombreCasquesEnfants']) && (int)$_POST['nombreCasquesEnfants'] > 0) {
-                $nombreCasquesEnfants = htmlspecialchars($_POST['nombreCasquesEnfants']);
+                $nombreCasquesEnfants = (int)htmlspecialchars($_POST['nombreCasquesEnfants']);
             } else {
                 $nombreCasquesEnfants = 0;
             }
 
+
             
             if (isset($_POST['nombreLugesEte']) && (int)$_POST['nombreLugesEte'] > 0) {
-                $nombreLugesEte = htmlspecialchars($_POST['nombreLugesEte']);
+                $nombreLugesEte = (int)htmlspecialchars($_POST['nombreLugesEte']);
             } else {
                 $nombreLugesEte = 0;
             }
@@ -59,40 +64,48 @@ class ReservationController
             $nombrePlaces = (int) $_POST['nombrePlaces'];
 
 
-            $idFormules = "";
-            if (isset($_POST['passSelection'])){
-                switch ($_POST['passSelection']) {
-                    case 'pass1jour':
-                        $idFormules = 1;
+            $idFormules = 0;
+            if (isset($_POST['passSelection']) || isset($_POST['passSelectionTarifReduit']) ){
+                if (isset($_POST['passSelection'])){
+                    switch ($_POST['passSelection']) {
+                        case 'pass1jour':
+                            echo 'idform 1';
+                            $idFormules = 1;
+                            break;
+                        
+                        case 'pass2jours':
+                            echo 'idform 3';
+                            $idFormules = 3;
+                            break;
+                        
+                        default:
+                            echo 'idform 5';
+                            $idFormules = 5;
+                            break;
+                    }
+                } else if (isset($_POST['passSelectionTarifReduit'])){ 
+                    switch ($_POST['passSelectionTarifReduit']) {
+                    case 'pass1jourreduit':
+                        echo 'idform 2';
+                        $idFormules = 2;
                         break;
-                    
-                    case 'pass2jours':
-                        $idFormules = 3;
-                        break;
-                    
-                    case 'pass3jours':
-                        $idFormules = 5;
+                        
+                    case 'pass2joursreduit':
+                        echo 'idform 4';
+                        $idFormules = 4;
                         break;
                     
                     default:
-                        if (isset($_POST['passSelectionTarifReduit'])){
-                            switch ($_POST['passSelectionTarifReduit']) {
-                                case 'pass1jourreduit':
-                                    $idFormules = 2;
-                                    break;
-                                
-                                case 'pass2joursreduit':
-                                    $idFormules = 4;
-                                    break;
-                                
-                                default:
-                                    $idFormules = 6;
-                                    break;
-                            }
-                    break;
-                    }
+                        echo 'idform 6';
+                        $idFormules = 6;
+                        break;
+                    } 
                 }
             }
+
+
+
+                
 
             
 
@@ -108,9 +121,9 @@ class ReservationController
             $idNuitee = "";
 
             
-            var_dump($_POST);
+            // var_dump($_POST);
 
-            echo 'idformules: ' . $idFormules .'<br>';
+
 
             if (isset($_POST['campingVan'])){
                 switch ($_POST['nuitVan']) {
@@ -140,50 +153,47 @@ class ReservationController
                         }
                         break;
                     
-                    case 'van3Nuits':
+                    default :
                         $idNuitee = 6;
+                        break;
+                }
+            } else if (isset($_POST['campingTente'])){
+                switch ($_POST['nuitTente']) {
+                    case 'tenteNuit1':
+                     //si la résa est en deux jours ou deux jours tarif reduit la nuité passe en 2 nuits sinon 1 nuit
+                        if ($idFormules==3 || $idFormules==4){
+                            $idNuitee = 2;
+                        } else {
+                            $idNuitee = 1;
+                        }
+                        break;
+                    
+                    case 'tenteNuit2':
+                        if ($idFormules==3 || $idFormules==4){
+                            $idNuitee = 2;
+                        } else {
+                            $idNuitee = 1;
+                        }
+                        break;
+                    
+                    case 'tenteNuit3':
+                        if ($idFormules==3 || $idFormules==4){
+                            $idNuitee = 2;
+                        } else {
+                            $idNuitee = 1;
+                        }
                         break;
                     
                     default:
-                        if(isset($_POST['campingTente'])){
-                            switch ($_POST['nuitTente']) {
-                                case 'tenteNuit1':
-                                 //si la résa est en deux jours ou deux jours tarif reduit la nuité passe en 2 nuits sinon 1 nuit
-                                    if ($idFormules==3 || $idFormules==4){
-                                        $idNuitee = 2;
-                                    } else {
-                                        $idNuitee = 1;
-                                    }
-                                    break;
-                                
-                                case 'tenteNuit2':
-                                    if ($idFormules==3 || $idFormules==4){
-                                        $idNuitee = 2;
-                                    } else {
-                                        $idNuitee = 1;
-                                    }
-                                    break;
-                                
-                                case 'tenteNuit3':
-                                    if ($idFormules==3 || $idFormules==4){
-                                        $idNuitee = 2;
-                                    } else {
-                                        $idNuitee = 1;
-                                    }
-                                    break;
-                                
-                                default:
-                                    $idNuitee = 3;
-                                    break;
-                            }
-                        }
-                break;
+                        $idNuitee = 3;
+                        break;
                 }
             }
 
+
             //on fait passer le prix par plusieurs switch pour le calculer
             $prix = "";
-            if (isset($idFormules)){
+            if ($idFormules>0){
                 switch ($idFormules) {
                     case '1':
                     $prix = 40;
@@ -210,57 +220,113 @@ class ReservationController
                     break;
                 }
             }
-            echo 'test1 : ' . $prix . '<br>';
+
             if (isset($nombreCasquesEnfants)){
                 $prix += 2 * $nombreCasquesEnfants;
             } 
             if ( isset($nombreLugesEte)){
                 $prix += 5 * $nombreLugesEte;
             }
-            echo $prix;
-            switch ($idNuitee) {
-                case '1':
-                    $prix += 5;
-                    break;
-                
-                case '2':
-                    $prix += 10;
-                    break;
-                
-                case '3':
-                    $prix += 12;
-                    break;
-                
-                case '4':
-                    $prix += 5;
-                    break;
-                
-                case '5':
-                    $prix += 10;
-                    break;
-                
-                default:
-                    $prix += 12;
-                    break;
+
+            if ($idNuitee){
+                switch ($idNuitee) {
+                    case '1':
+                        $prix += 5;
+                        break;
+                    
+                    case '2':
+                        $prix += 10;
+                        break;
+                    
+                    case '3':
+                        $prix += 12;
+                        break;
+                    
+                    case '4':
+                        $prix += 5;
+                        break;
+                    
+                    case '5':
+                        $prix += 10;
+                        break;
+                    
+                    default:
+                        $prix += 12;
+                        break;
+                }
+            }
+
+            if(isset($_POST['rgpd'])){
+                $rgpd = new \DateTime();
+            } 
+
+            if(isset($_POST['motDePasse'])){
+                $mdp = password_hash($_POST['motDePasse'], PASSWORD_DEFAULT);
             }
 
 
-            echo '<pre>',
-                'nom :' . $nom, '<BR>' .
-                'prenom :' .  $prenom,  '<BR>' .
-                'mail :' . $email,  '<BR>' .
-                'tel :' . $tel,  '<BR>' .
-                'adresse :' . $adresse,  '<BR>' .
-                'nmbre cask:' . $nombreCasquesEnfants, '<BR>' . 
-                'nmbre luges:' . $nombreLugesEte, '<BR>' . 
-                'nmbre places:' . $nombrePlaces, '<BR>' . 
-                'prix:' . $prix, '<BR>' . 
-                'idformules:' . $idFormules, '<BR>' . 
-                'idNuitee:' . $idNuitee, '<BR>' . 
-                '</pre>';
+            // echo '<pre>',
+            //     'nom :' . $nom, '<BR>' .
+            //     'prenom :' .  $prenom,  '<BR>' .
+            //     'mail :' . $email,  '<BR>' .
+            //     'tel :' . $tel,  '<BR>' .
+            //     'adresse :' . $adresse,  '<BR>' .
+            //     'nmbre cask:' . $nombreCasquesEnfants . gettype($nombreCasquesEnfants) . '<BR>' . 
+            //     'nmbre luges:' . $nombreLugesEte, '<BR>' . 
+            //     'nmbre places:' . $nombrePlaces, '<BR>' . 
+            //     'prix:' . $prix, '<BR>' . 
+            //     'idformules:' . $idFormules, '<BR>' . 
+            //     'idNuitee:' . $idNuitee, '<BR>' . 
+            //     'rgpd:' . $rgpd->format('Y-m-d') . '<BR>' .
+            //     'mot de passe: '. $mdp .
+            //     '</pre>';
 
+            //creation des classes en vues de l'écriture en BDD
+            $User = new User();
+            $User->setPrenom($prenom);
+            $User->setNom($nom);
+            $User->setEmail($email);
+            $User->setTelephone($tel);
+            $User->setAdressePostale($adresse);
+            $User->setRGPD($rgpd);
+            $User->setMotDePasse($mdp);
+            $User->setRole(null);
+
+            // var_dump($User);
+            $userRepository = new UserRepository();
+            $userRepository->createThisUser($User);
+
+            //recupération du dernier ID pour l'inserer dans la table reservation
+            $lastUserId = $userRepository->getLastId();
+            // echo "l'id de l'utilisateur est : " . $lastUserId;
+
+            $reservation = new Reservation();
+            $reservation->setQuantite($nombrePlaces);
+            $reservation->setLuge($nombreLugesEte);
+            $reservation->setCasque($nombreCasquesEnfants);
+            $reservation->setIdUtilisateurs($lastUserId);
+            $reservation->setPrix($prix);
+
+            // var_dump($reservation);
+            $reservationRepository = new ReservationRepository;
+            $reservationRepository->createThisReservation($reservation);
+ 
+            //mettre l'id de l'utilisateur dans la session
+            $_SESSION['idUtilisateur'] = $lastUserId;
+            header('location: /dashboard');
+            die;
         } else {
-            echo 'les champs ne sont pas remplis';
+            header ("location:" .HOME_URL."?erreur=connexion");
         }
     }
+
+    public function showReservation ($id){ 
+        $reservationRepository = new ReservationRepository;
+        $reservation = $reservationRepository->getReservationById($id);
+        //faire de meme avec userRepository
+        $userRepository = new UserRepository;
+        $user = $userRepository->getThisUserById($id);
+        $this->render('Dashboard', ['reservation' => $reservation, 'user' => $user]);
+    }
+
 }
