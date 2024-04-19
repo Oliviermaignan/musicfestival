@@ -12,7 +12,7 @@ Le fichier de configuration `config.php` est utilisé pour spécifier les param�
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'my_webapp__9');
 define('DB_USER', 'my_webapp__9');
-define('DB_PWD', '7aWwLaHZMDIfGWPHZbwAIODUUqJiP7');
+define('DB_PWD', 'yourPSW');
 
 define('HOME_URL', '/olivier/musicfestival/public/');
 
